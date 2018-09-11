@@ -1,0 +1,12 @@
+[Core]
+name = Encrypt
+module = encrypt
+
+[Documentation]
+description = A simple plugin to encrypt strings
+
+[Python]
+version = 3
+
+[Errbot]
+max = 5.2.0
