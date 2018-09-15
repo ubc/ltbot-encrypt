@@ -21,14 +21,19 @@ class Encrypt(BotPlugin):
         else:
             super(Encrypt, self).activate()
 
-    @webhook('/encrypt', methods=('POST',), raw=True)
+    @webhook('/encrypt', methods=('GET', 'POST'), raw=True)
     def encrypt(self, request):
         """A webhook encrypt a string from POST body"""
-        try:
-            f = Fernet(self.key.encode('utf-8'))
-            token = f.encrypt(request.body.read())
-            self.log.info(token)
-            return token
-        except ValueError as e:
-            self.log.exception("Encryption Key Error: " + str(e))
-            abort(500, "Encryption Key Error: " + str(e))
+        if request.method == 'GET':
+            return '<form action="/encrypt" method="post">' \
+                   '<input name="key" type="text"/><input type="submit" value="Submit">' \
+                   '</form>'
+        else:
+            try:
+                f = Fernet(self.key.encode('utf-8'))
+                token = f.encrypt(request.body.read())
+                self.log.info(token)
+                return token
+            except ValueError as e:
+                self.log.exception("Encryption Key Error: " + str(e))
+                abort(500, "Encryption Key Error: " + str(e))
