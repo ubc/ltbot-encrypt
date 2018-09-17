@@ -31,7 +31,7 @@ class Encrypt(BotPlugin):
         else:
             try:
                 f = Fernet(self.key.encode('utf-8'))
-                token = f.encrypt(request.body.read())
+                token = f.encrypt(request.body.read().replace('key=', ''))
                 self.log.info(token)
                 return token
             except ValueError as e:
