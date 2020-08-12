@@ -1,5 +1,5 @@
 import os
-from bottle import abort
+from flask import abort
 
 from errbot import BotPlugin, webhook
 from cryptography.fernet import Fernet
