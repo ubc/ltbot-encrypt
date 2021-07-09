@@ -9,4 +9,4 @@ description = A simple plugin to encrypt strings
 version = 3
 
 [Errbot]
-max = 6.1.4
+min = 6.1.4
